@@ -9,23 +9,35 @@ File: [`semantic_duplicate_registry.py`](./semantic_duplicate_registry.py)
 
 ## Deployment (GenLayer Studio)
 
-Verified live in GenLayer Studio:
+**Current deployment** (includes the `locked_reserve`/`collected_fees` fix
+and `get_balance()`):
+
+| | |
+|---|---|
+| Contract address | [`0x3387a5EaAAbF7f36d9b37e3A9909883f709Aa766`](https://studio.genlayer.com/?import-contract=0x3387a5EaAAbF7f36d9b37e3A9909883f709Aa766) |
+| Deployment tx | [`0xe64019f2...5af3c`](https://explorer-studio.genlayer.com/tx/0xe64019f2a1377066f2287d64aad1d6d723b2c77b4ec7a871df57ac9ad685af3c) |
+
+Verified: `get_balance()` matches `get_collected_fees() + get_locked_reserve()`
+after a live `submit_entry` call, confirming the fix holds on-chain.
+
+<details>
+<summary>Superseded deployments (older, kept for reference)</summary>
+
+**Second deployment** (had the fix, superseded by the current one above):
+
+| | |
+|---|---|
+| Contract address | [`0xf4C07301179C0cb22E4c7F0e713F15A2E2560373`](https://studio.genlayer.com/?import-contract=0xf4C07301179C0cb22E4c7F0e713F15A2E2560373) |
+| Deployment tx | [`0xc343951e...82eacae`](https://explorer-studio.genlayer.com/tx/0xc343951e50dd57dcae075f6578420ecc7fc3a9d150c33f19ec45203ab82eacae) |
+
+**Original deployment** (predates the fix entirely — do not use):
 
 | Transaction | Link |
 |---|---|
 | Deployment | [`0xe84e058d...86875`](https://explorer-studio.genlayer.com/tx/0xe84e058d9451fd6c2c0deee396396fff68317d7eb80d3b33cc4987216b986875) |
 | First `submit_entry` call | [`0xfeec1815...86990`](https://explorer-studio.genlayer.com/tx/0xfeec1815c1a5aa5b77da8fa9a1ec7e450ef3af7899efedc9dafd1af6c8386990) |
 
-> If the two links above are swapped, update the table — labels were
-> assigned by call order, not independently re-verified against the
-> explorer.
-
-> **⚠️ Redeploy required.** The transactions above are from a version of
-> the contract with a fee-accounting bug (see below). The source in this
-> repo has since been corrected; the deployment linked here does **not**
-> reflect it. Redeploy from the current `semantic_duplicate_registry.py`
-> and replace the links above before relying on this registry for
-> anything real.
+</details>
 
 ## Fixed: locked bonds vs. withdrawable fees
 
@@ -149,6 +161,7 @@ so it can be read end-to-end in one sitting and reused as-is.
 | `list_active_entries(offset, limit)` | view | Paginated listing of active entries |
 | `get_collected_fees()` | view | Withdrawable fees (forfeited bonds + overpayment only) |
 | `get_locked_reserve()` | view | Bonds reserved against active entries; not withdrawable |
+| `get_balance()` | view | Actual GEN balance held by the contract — should always equal `get_collected_fees() + get_locked_reserve()` |
 
 ## Manual test plan
 
