@@ -1,0 +1,21 @@
+{
+  "contract_name": "SemanticDuplicateRegistry",
+  "contract_file": "semantic_duplicate_registry.py",
+  "network": "studio",
+  "constructor_args": {
+    "admin": "0xF79cFE699bB098c129Df37918d384dd7B6531157"
+  },
+  "deployment": {
+    "status": "stale - predates locked_reserve/collected_fees fix, redeploy required",
+    "tx_hash": "0xe84e058d9451fd6c2c0deee396396fff68317d7eb80d3b33cc4987216b986875",
+    "explorer_url": "https://explorer-studio.genlayer.com/tx/0xe84e058d9451fd6c2c0deee396396fff68317d7eb80d3b33cc4987216b986875"
+  },
+  "sample_transactions": [
+    {
+      "method": "submit_entry",
+      "status": "stale - predates fix, from old deployment",
+      "tx_hash": "0xfeec1815c1a5aa5b77da8fa9a1ec7e450ef3af7899efedc9dafd1af6c8386990",
+      "explorer_url": "https://explorer-studio.genlayer.com/tx/0xfeec1815c1a5aa5b77da8fa9a1ec7e450ef3af7899efedc9dafd1af6c8386990"
+    }
+  ]
+}
